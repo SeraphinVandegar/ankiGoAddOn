@@ -11,9 +11,9 @@ from aqt.qt import *
 def testFunction() -> None:
     # get the number of cards in the current collection, which is stored in
     # the main window
-    cardCount = mw.col.cardCount()
-    # show a message box
-    showInfo("Card count: %d" % cardCount)
+    for id, ivl in mw.col.db.execute("select id, ivl from cards"):
+        showInfo("card id %d has ivl %d" % (id, ivl))
+
 
 # create a new menu item, "test"
 action = QAction("test", mw)

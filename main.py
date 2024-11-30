@@ -2,9 +2,12 @@ from anki.collection import Collection
 
 col = Collection("/Users/seraphin/Library/Application Support/Anki2/test/collection.anki2")
 
+
 def saveSync():
     def sync_deck():
         auth = col.sync_login("seraphin.vandegar@student.howest.be", "pppppppp", None)
+        #auth = col.sync_login("s.vandegar@student.helmo.be", "pppppppp", None)
+        #auth = col.sync_login("sera.vandegar@gmail.com", "pppppppp", None)
         ##col.save(trx=False)
         col.sync_collection(auth, False)
     sync_deck()
@@ -23,8 +26,8 @@ def createCard():
     print(model)
 
     # Get the deck by name
-    deck = col.decks.byName("Default")
-    print(deck)
+ #   deck = col.decks.byName("Default")
+ #   print(deck)
 
     # Create a new note
     note = col.newNote()
@@ -32,7 +35,7 @@ def createCard():
     print(note)
     print(note.fields)
 
-    fields = ["Louvre", "New"]
+    fields = ["Magali", "Fofole"]
     # Set the fields (content) of the note
     for i, field in enumerate(fields):
         note.fields[i] = field

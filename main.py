@@ -1,9 +1,9 @@
 from User import User
 
 helmo = User("s.vandegar@student.helmo.be", "pppppppp")
-helmo.createCard()
-helmo.sync()
-
+#print(helmo.get_due_counts())
 howest = User("seraphin.vandegar@student.howest.be", "pppppppp")
-howest.createCard()
-howest.sync()
+
+c = helmo.get_due_counts()
+print("__ C __")
+print(c)

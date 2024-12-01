@@ -1,5 +1,8 @@
 from anki.collection import Collection
 
+from anki.cards import Card
+
+
 class User:
     def __init__(self, username, password):
         self.username = username
@@ -24,15 +27,12 @@ class User:
     def deleteNotes(self):
         self.col.db.all("DELETE FROM notes")
 
-
     def getCardsToRevise(self):
-        sched = self.col.sched
+        due_counts = self.col.sched.get_queued_cards(fetch_limit=1000)
+        return list(map(
+            lambda backendCard: Card(self.col, backendCard.card.id, backend_card=backendCard.card), due_counts.cards))
 
-        # Get counts of cards to revise
-        due_counts = sched.get_queued_cards(fetch_limit=1000)
-        return due_counts
-
-    def get_due_card(self):
+    def getCardToRevise(self):
         return self.col.sched.getCard()
 
     def answerCard(self, card, ease):

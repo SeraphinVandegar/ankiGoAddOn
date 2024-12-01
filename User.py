@@ -25,11 +25,15 @@ class User:
         self.col.db.all("DELETE FROM notes")
 
 
-    def get_due_counts(self):
+    def getCardsToRevise(self):
         sched = self.col.sched
-
-
 
         # Get counts of cards to revise
         due_counts = sched.get_queued_cards(fetch_limit=1000)
         return due_counts
+
+    def get_due_card(self):
+        return self.col.sched.getCard()
+
+    def answerCard(self, card, ease):
+        self.col.sched.answerCard(card, ease)

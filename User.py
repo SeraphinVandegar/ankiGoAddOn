@@ -2,7 +2,6 @@ from anki.collection import Collection
 
 from anki.cards import Card
 
-
 class User:
     def __init__(self, username, password):
         self.username = username

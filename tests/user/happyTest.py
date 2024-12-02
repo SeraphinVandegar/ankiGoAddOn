@@ -21,9 +21,17 @@ def checkNoteDeleted(u, note):
         raise Exception("Note found")
 
 
+def checkCardFields(u, fields):
+    if not (u.getCardFields(testingNote.id) == fields):
+        raise Exception("Fields not equal")
+
+
 user = User("s.vandegar@student.helmo.be", "_")
 
 testingNote = user.createNote(["front", "back"])
 checkNoteAdded(user, testingNote)
+
+checkCardFields(user, ["front", "back"])
+
 user.deleteNote(testingNote.id)
 checkNoteDeleted(user, testingNote)

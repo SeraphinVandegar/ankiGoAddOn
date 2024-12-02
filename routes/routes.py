@@ -33,3 +33,10 @@ def initRoutes(app):
             "ids": ids
         }
         return jsonify(response)
+
+    @app.route('/notes', methods=['POST'])
+    def post_notes():
+        data = request.json
+        user = getUserFromHeader(request)
+        user.createNote([data["front"], data["back"]])
+        return ""

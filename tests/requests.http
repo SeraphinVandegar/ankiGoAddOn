@@ -1,0 +1,16 @@
+###
+GET localhost:5000/protected
+Authorization: {"username":"s.vandegar", "password":"123456"}
+
+
+###
+GET localhost:5000/get-notes
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+
+###
+GET localhost:5000/get-notes
+Authorization: {"username":"_s.vandegar@student.helmo.b
+
+###
+GET localhost:5000/get-notes-to-revise
+Authorization: {"username":"seraphin.vandegar@student.howest.be", "password":"pppppppp"}

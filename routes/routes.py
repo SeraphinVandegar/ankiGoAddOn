@@ -39,4 +39,13 @@ def initRoutes(app):
         data = request.json
         user = getUserFromHeader(request)
         user.createNote([data["front"], data["back"]])
+        user.sync()
+        return ""
+
+    @app.route('/notes', methods=['DELETE'])
+    def delete_notes():
+        user = getUserFromHeader(request)
+        id = request.args.get('id')
+        user.deleteNote(id)
+        user.sync()
         return ""

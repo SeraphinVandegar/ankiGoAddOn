@@ -32,8 +32,7 @@ class User:
         self.col.sync_collection(auth, False)
 
     def deleteNote(self, id):
-        query = f"DELETE FROM notes WHERE id IN (?)"
-        self.col.db.execute(query, id)
+        self.col.remove_notes([int(id)])
 
     def _deleteAllNotes(self):
         self.col.db.all("DELETE FROM notes")

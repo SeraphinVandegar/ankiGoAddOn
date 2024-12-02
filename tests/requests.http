@@ -16,10 +16,14 @@ Authorization: {"username":"seraphin.vandegar@student.howest.be", "password":"pp
 
 ### > 200
 POST localhost:5000/notes
-Authorization: {"username":"seraphin.vandegar@student.howest.be", "password":"pppppppp"}
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 Content-Type: application/json
 
 {
 "front" : "Justine",
-"back" : "456"
+"back" : "Back"
 }
+
+### > 200
+DELETE localhost:5000/notes?id=1733158747316
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}

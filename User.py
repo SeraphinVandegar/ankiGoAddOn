@@ -18,19 +18,24 @@ class User:
     def getNotes(self):
         return self.col.db.all("SELECT * FROM notes")
 
-    def createCard(self):
+    def createNote(self, fields, tags=None):
+        if tags is None:
+            tags = []
         note = self.col.newNote()
-        note.fields = ["Sera", "Fofole"]
-        note.tags = ["Paris", "Geography"]
-        note.deck = "Defaxult"
-        print(note.deck)
+        note.fields = fields
+        note.tags = tags
         self.col.addNote(note)
+        return note
 
     def sync(self):
         auth = self.col.sync_login(self.username, self.password, None)
         self.col.sync_collection(auth, False)
 
-    def deleteNotes(self):
+    def deleteNote(self, id):
+        query = f"DELETE FROM notes WHERE id IN (?)"
+        self.col.db.execute(query, id)
+
+    def _deleteAllNotes(self):
         self.col.db.all("DELETE FROM notes")
 
     def getCardsToRevise(self):

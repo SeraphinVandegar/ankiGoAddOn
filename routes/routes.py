@@ -19,10 +19,8 @@ def initRoutes(app):
     @app.route('/get-notes', methods=['GET'])
     def get_notes():
         user = getUserFromHeader(request)
-
         cards = []
         for c in user.getNotes():
-            print(c)
             fields = c[6].split("\x1f")
             dto = CardDto(c[0], fields[0], fields[1], [x for x in c[5].split(" ") if x])
             cards.append(dto.toJson())
@@ -31,13 +29,7 @@ def initRoutes(app):
     @app.route('/get-notes-to-revise', methods=['GET'])
     def get_notes_to_revise():
         user = getUserFromHeader(request)
-        ids = []
-        for card in user.getCardsToRevise():
-            ids.append(card.id)
-        response = {
-            "ids": ids
-        }
-        return jsonify(response)
+        return jsonify([card.id for card in user.getCardsToRevise()])
 
     @app.route('/notes', methods=['POST'])
     def post_notes():

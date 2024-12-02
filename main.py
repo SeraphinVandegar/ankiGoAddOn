@@ -12,7 +12,8 @@ def getUserFromHeader(request):
         auth_header = request.headers.get('Authorization')
         credentials = json.loads(auth_header)
         return User(credentials["username"], credentials["password"])
-    except:
+    except Exception as error:
+        print(error)
         abort(401, description="Access Denied")
 
 

@@ -2,6 +2,10 @@
 GET localhost:5000/get-notes
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 
+### get-notes > 200
+GET localhost:5000/get-notes
+Authorization: {"username":"seraphin.vandegar@student.howest.be", "password":"pppppppp"}
+
 ### get-notes failled > 401
 GET localhost:5000/get-notes
 Authorization: {"username":"_s.vandegar@student.helmo.b
@@ -9,3 +13,13 @@ Authorization: {"username":"_s.vandegar@student.helmo.b
 ### get-notes-to-revise > 200
 GET localhost:5000/get-notes-to-revise
 Authorization: {"username":"seraphin.vandegar@student.howest.be", "password":"pppppppp"}
+
+### > 200
+POST localhost:5000/notes
+Authorization: {"username":"seraphin.vandegar@student.howest.be", "password":"pppppppp"}
+Content-Type: application/json
+
+{
+"front" : "Justine",
+"back" : "456"
+}

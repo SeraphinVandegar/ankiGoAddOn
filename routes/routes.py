@@ -1,6 +1,7 @@
 import json
 
-from User import User
+from data.CardDto import CardDto
+from data.User import User
 
 from flask import request, jsonify, abort
 
@@ -18,10 +19,14 @@ def initRoutes(app):
     @app.route('/get-notes', methods=['GET'])
     def get_notes():
         user = getUserFromHeader(request)
-        response = {
-            "notes": user.getNotes()
-        }
-        return jsonify(response)
+
+        cards = []
+        for c in user.getNotes():
+            print(c)
+            fields = c[6].split("\x1f")
+            dto = CardDto(c[0], fields[0], fields[1], [x for x in c[5].split(" ") if x])
+            cards.append(dto.toJson())
+        return jsonify(cards)
 
     @app.route('/get-notes-to-revise', methods=['GET'])
     def get_notes_to_revise():

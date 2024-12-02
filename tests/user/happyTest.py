@@ -22,7 +22,7 @@ def checkNoteDeleted(u, note):
 
 
 def checkCardFields(u, fields):
-    if not (u.getCardFields(testingNote.id) == fields):
+    if not (u.getNoteFields(testingNote.id) == fields):
         raise Exception("Fields not equal")
 
 

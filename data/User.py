@@ -40,27 +40,41 @@ class User:
     def getCardsToRevise(self):
         due_counts = self.col.sched.get_queued_cards(fetch_limit=1000)
         return list(map(
-            lambda backendCard: Card(self.col, backendCard.card.id, backend_card=backendCard.card), due_counts.cards))
+            lambda backendCard: Card(self.col, backendCard.card.id), due_counts.cards))
 
+    def getCardIds(self):
+        return self.col.find_cards("")
+
+    def getCard(self, id):
+        return Card(self.col, id)
     def getCardToRevise(self):
         return self.col.sched.getCard()
 
     def answerCard(self, card, ease):
         self.col.sched.answerCard(card, ease)
 
-    def getCardFields(self, card: int):
+
+    def getCardFieds(self, card : id(int)):
+        card = self.col.get_card(card)
+        return self.getNoteFields(card.nid)
+    def getNoteFields(self, id: int):
         try:
-            fields = self.fieldsById[card]
+            fields = self.fieldsById[id]
             return fields
         except:
             pass
         self.refreshNotesMap()
         try:
-            fields = self.fieldsById[card]
+            fields = self.fieldsById[id]
             return fields
         except:
             pass
         return None
 
     def getCardFieldsFromCard(self, card: Card):
-        return self.getCardFields(card._to_backend_card().note_id)
+        return self.getNoteFields(card._to_backend_card().note_id)
+
+    def getCards(self):
+        cards = [self.col.get_card(id) for id in self.col.find_cards("")]
+        print(cards)
+        return cards

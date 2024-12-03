@@ -32,8 +32,11 @@ def initUserRoutes(app):
 
     @app.route(CARDS_TO_REVISE_ENDPOINT, methods=['PATCH'])
     def registerRevision():
-        pass
-
+        timer_started = float(request.args.get('timer_started'))
+        id = int(request.args.get('id'))
+        ease = int(request.args.get('ease'))
+        UserServices.registerRevision(getUserFromHeader(request), id, ease, timer_started)
+        return ""
     @app.route('/notes', methods=['DELETE'])
     def deleteNote():
         pass

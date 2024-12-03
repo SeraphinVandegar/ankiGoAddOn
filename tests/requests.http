@@ -58,3 +58,8 @@ Content-Type: application/json
   "foreign" : "Hallo4",
   "tags" : []
 }]
+
+
+### cards to revise > 200
+PATCH localhost:5000/cards-to-revise?id=1733151780893&ease=2&timer_started=1733174593.5337138
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}

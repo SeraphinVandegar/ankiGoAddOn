@@ -29,3 +29,10 @@ class UserServices:
                 continue
             dtos.append(CardDto(card.id, fields[0], fields[1]).__dict__)
         return dtos
+
+    @classmethod
+    def registerRevision(cls, user : User, id : int, ease : int, timer_started : float):
+        card = user.getCard(id)
+        card.timer_started = timer_started
+        user.answerCard(card, ease)
+        user.sync()

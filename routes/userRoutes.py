@@ -16,15 +16,16 @@ def initUserRoutes(app):
     @app.route(CARDS_ENDPOINT, methods=['POST'])
     def createCard():
         data = request.json
-        dtos = []
-        for dto in data:
-            dtos.append(CardDto(-1, dto['native'], dto['foreign'], dto['tags']))
+        dtos = [CardDto(-1, dto['native'], dto['foreign'], dto['tags']) for dto in data]
         UserServices.createCard(getUserFromHeader(request), dtos)
-        return "wx"
+        return ""
 
     @app.route(CARDS_ENDPOINT, methods=['PUT'])
     def updateCard():
-        pass
+        data = request.json
+        dtos = [CardDto(dto['id'], dto['native'], dto['foreign'], dto['tags']) for dto in data]
+        UserServices.updateNotes(getUserFromHeader(request), dtos)
+        return ""
 
     @app.route(CARDS_TO_REVISE_ENDPOINT, methods=['GET'])
     def getCardsToRevise():

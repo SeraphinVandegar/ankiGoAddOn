@@ -1,6 +1,5 @@
-
-### cards to revise > 200
-GET localhost:5000/cards-to-revise
+### cards > 200
+GET localhost:5000/cards
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 
 ### cards > 200
@@ -10,18 +9,17 @@ Content-Type: application/json
 
 [{
   "native" : "Bonjour",
-  "foreign" : "Hallo3",
+  "foreign" : "Hallo333",
   "tags" : []
 },{
   "native" : "Bonjour",
-  "foreign" : "Hallo4",
+  "foreign" : "Hallo444",
   "tags" : []
 }]
 
-### cards > 200
-GET localhost:5000/cards
+### cards to revise > 200
+GET localhost:5000/cards-to-revise
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
-
 
 ### cards to revise > 200
 PATCH localhost:5000/cards-to-revise?id=1733151780893&ease=2&timer_started=1733174593.5337138
@@ -35,3 +33,19 @@ Content-Type: application/json
 [1733000565236]
 
 
+### update > 200
+PUT localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+Content-Type: application/json
+
+[{
+  "id" : 1733224099623,
+  "native" : "updated",
+  "foreign" : "H3",
+  "tags" : []
+},{
+  "id" : 1733224099625,
+  "native" : "updated",
+  "foreign" : "H4",
+  "tags" : []
+}]

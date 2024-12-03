@@ -47,3 +47,10 @@ class UserServices:
                 pass
         user.deleteNote(nids)
         user.sync()
+
+    @classmethod
+    def updateNotes(cls, user : User, cards : [CardDto]):
+        for card in cards:
+            nid = user.getCard(card.id).nid
+            user.updateNote(nid, [card.native, card.foreign])
+        user.sync()

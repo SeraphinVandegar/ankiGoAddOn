@@ -31,7 +31,7 @@ class User:
         auth = self.col.sync_login(self.username, self.password, None)
         self.col.sync_collection(auth, False)
 
-    def deleteNote(self, ids : [int]):
+    def deleteNote(self, ids: [int]):
         self.col.remove_notes([int(id) for id in ids])
 
     def _deleteAllNotes(self):
@@ -47,16 +47,17 @@ class User:
 
     def getCard(self, id):
         return Card(self.col, id)
+
     def getCardToRevise(self):
         return self.col.sched.getCard()
 
     def answerCard(self, card, ease):
         self.col.sched.answerCard(card, ease)
 
-
-    def getCardFieds(self, card : id(int)):
+    def getCardFieds(self, card: id(int)):
         card = self.col.get_card(card)
         return self.getNoteFields(card.nid)
+
     def getNoteFields(self, id: int):
         try:
             fields = self.fieldsById[id]
@@ -78,3 +79,8 @@ class User:
         cards = [self.col.get_card(id) for id in self.col.find_cards("")]
         print(cards)
         return cards
+
+    def updateNote(self, id, fields):
+        note = self.col.get_note(id)
+        note.fields = fields
+        self.col.update_note(note)

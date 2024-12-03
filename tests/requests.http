@@ -45,8 +45,12 @@ POST localhost:5000/cards
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 Content-Type: application/json
 
-{
+[{
   "native" : "Bonjour",
-  "foreign" : "Hallo",
+  "foreign" : "Hallo3",
   "tags" : []
-}
+},{
+  "native" : "Bonjour",
+  "foreign" : "Hallo4",
+  "tags" : []
+}]

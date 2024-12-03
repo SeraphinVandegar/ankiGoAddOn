@@ -17,8 +17,10 @@ def initUserRoutes(app):
     @app.route(CARDS_ENDPOINT, methods=['POST'])
     def createCard():
         data = request.json
-        dto = CardDto(-1, data['native'], data['foreign'], data['tags'])
-        UserServices.createCard(getUserFromHeader(request), dto)
+        dtos = []
+        for dto in data:
+            dtos.append(CardDto(-1, dto['native'], dto['foreign'], dto['tags']))
+        UserServices.createCard(getUserFromHeader(request), dtos)
         return ""
     @app.route(CARDS_ENDPOINT, methods=['PUT'])
     def updateCard():

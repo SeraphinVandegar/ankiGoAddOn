@@ -1,21 +1,13 @@
 import json
 import time
 
-from data.CardDto import CardDto
-from data.User import User
+from domain.CardDto import CardDto
+from domain.User import User
 
 from flask import request, jsonify, abort
 
 
 def initRoutes(app):
-    def getUserFromHeader(_request) -> User:
-        try:
-            auth_header = _request.headers.get('Authorization')
-            credentials = json.loads(auth_header)
-            return User(credentials["username"], credentials["password"])
-        except Exception as error:
-            print(error)
-            abort(401, description="Access Denied")
 
     @DeprecationWarning
     @app.route('/get-notes', methods=['GET'])
@@ -64,7 +56,7 @@ def initRoutes(app):
 
     @app.route('/notes-revise', methods=['POST'])
     def revise_card():
-        #Getting data
+        #Getting domain
         user = getUserFromHeader(request)
         nid = int(request.args.get('id'))
         ease = int(request.args.get('ease'))

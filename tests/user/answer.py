@@ -1,6 +1,6 @@
 import time
 
-from data.User import User
+from domain.User import User
 
 user = User("s.vandegar@student.helmo.be", "_")
 

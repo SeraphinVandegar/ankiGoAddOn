@@ -1,4 +1,4 @@
-from data.User import User
+from domain.User import User
 
 
 def checkNoteAdded(u, note):

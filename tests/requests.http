@@ -35,3 +35,18 @@ Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 ### > 200
 GET localhost:5000/get-cards
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+
+### cards > 200
+GET localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+
+### cards > 200
+POST localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+Content-Type: application/json
+
+{
+  "native" : "Bonjour",
+  "foreign" : "Hallo",
+  "tags" : []
+}

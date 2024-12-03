@@ -1,6 +1,5 @@
 from flask import Flask
 
-from routes.routes import initRoutes
 from routes.userRoutes import initUserRoutes
 
 # Run the app

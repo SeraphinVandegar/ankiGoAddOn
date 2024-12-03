@@ -14,9 +14,18 @@ class UserServices:
             dtos.append(CardDto(card.id, fields[0], fields[1]).__dict__)
         return dtos
 
-
     @classmethod
-    def createCard(cls, user: User, cardDto : [CardDto]):
+    def createCard(cls, user: User, cardDto: [CardDto]):
         for cardDto in cardDto:
             user.createNote([cardDto.native, cardDto.foreign], cardDto.tags)
         user.sync()
+
+    @classmethod
+    def getCardsToRevise(cls, user: User):
+        dtos = []
+        for card in user.getCardsToRevise():
+            fields = user.getCardFieldsFromCard(card)
+            if fields is None:
+                continue
+            dtos.append(CardDto(card.id, fields[0], fields[1]).__dict__)
+        return dtos

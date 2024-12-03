@@ -40,6 +40,10 @@ Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 GET localhost:5000/cards
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 
+### cards to revise > 200
+GET localhost:5000/cards-to-revise
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+
 ### cards > 200
 POST localhost:5000/cards
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}

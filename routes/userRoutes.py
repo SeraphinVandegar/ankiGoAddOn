@@ -21,14 +21,14 @@ def initUserRoutes(app):
         for dto in data:
             dtos.append(CardDto(-1, dto['native'], dto['foreign'], dto['tags']))
         UserServices.createCard(getUserFromHeader(request), dtos)
-        return ""
+        return "wx"
     @app.route(CARDS_ENDPOINT, methods=['PUT'])
     def updateCard():
         pass
 
     @app.route(CARDS_TO_REVISE_ENDPOINT, methods=['GET'])
     def getCardsToRevise():
-        pass
+        return UserServices.getCardsToRevise(getUserFromHeader(request))
 
     @app.route(CARDS_TO_REVISE_ENDPOINT, methods=['PATCH'])
     def registerRevision():

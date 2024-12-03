@@ -7,7 +7,7 @@ from domain.User import User
 
 def getUserFromHeader(_request) -> User:
     try:
-        auth_header = _request.headers.get('Authorization')
+        auth_header = _request.headers.get('Authorization').replace("Bearer ", "")
         credentials = json.loads(auth_header)
         return User(credentials["username"], credentials["password"])
     except Exception as error:

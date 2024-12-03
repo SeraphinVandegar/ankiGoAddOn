@@ -42,8 +42,9 @@ class UserServices:
         nids = []
         for id in ids:
             try:
-               nids.append(user.getCard(id).nid)
-            except:
+               nids.append(user.getCard(int(id)).nid)
+            except Exception as e:
+                print(e)
                 pass
         user.deleteNote(nids)
         user.sync()

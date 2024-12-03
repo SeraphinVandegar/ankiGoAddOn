@@ -32,7 +32,7 @@ class User:
         self.col.sync_collection(auth, False)
 
     def deleteNote(self, ids: [int]):
-        self.col.remove_notes([int(id) for id in ids])
+        self.col.remove_notes(ids)
 
     def _deleteAllNotes(self):
         self.col.db.all("DELETE FROM notes")
@@ -77,7 +77,6 @@ class User:
 
     def getCards(self):
         cards = [self.col.get_card(id) for id in self.col.find_cards("")]
-        print(cards)
         return cards
 
     def updateNote(self, id, fields):

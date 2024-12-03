@@ -31,8 +31,8 @@ class User:
         auth = self.col.sync_login(self.username, self.password, None)
         self.col.sync_collection(auth, False)
 
-    def deleteNote(self, id):
-        self.col.remove_notes([int(id)])
+    def deleteNote(self, ids : [int]):
+        self.col.remove_notes([int(id) for id in ids])
 
     def _deleteAllNotes(self):
         self.col.db.all("DELETE FROM notes")

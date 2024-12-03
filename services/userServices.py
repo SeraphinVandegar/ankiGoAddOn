@@ -31,8 +31,19 @@ class UserServices:
         return dtos
 
     @classmethod
-    def registerRevision(cls, user : User, id : int, ease : int, timer_started : float):
+    def registerRevision(cls, user: User, id: int, ease: int, timer_started: float):
         card = user.getCard(id)
         card.timer_started = timer_started
         user.answerCard(card, ease)
+        user.sync()
+
+    @classmethod
+    def deleteNotes(cls, user: User, ids: [int]):
+        nids = []
+        for id in ids:
+            try:
+               nids.append(user.getCard(id).nid)
+            except:
+                pass
+        user.deleteNote(nids)
         user.sync()

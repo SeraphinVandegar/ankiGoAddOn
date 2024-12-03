@@ -29,9 +29,11 @@ def checkCardFields(u, fields):
 user = User("s.vandegar@student.helmo.be", "_")
 
 testingNote = user.createNote(["front", "back"])
+testingNote2 = user.createNote(["front", "back"])
 checkNoteAdded(user, testingNote)
 
 checkCardFields(user, ["front", "back"])
 
-user.deleteNote(testingNote.id)
+user.deleteNote([str(testingNote.id), str(testingNote2.id)])
 checkNoteDeleted(user, testingNote)
+checkNoteDeleted(user, testingNote2)

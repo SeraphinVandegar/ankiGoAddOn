@@ -9,7 +9,6 @@ CARDS_TO_REVISE_ENDPOINT = '/cards-to-revise'
 
 
 def initUserRoutes(app):
-
     @app.route(CARDS_ENDPOINT, methods=['GET'])
     def getCards():
         return UserServices.getCards(getUserFromHeader(request))
@@ -22,6 +21,7 @@ def initUserRoutes(app):
             dtos.append(CardDto(-1, dto['native'], dto['foreign'], dto['tags']))
         UserServices.createCard(getUserFromHeader(request), dtos)
         return "wx"
+
     @app.route(CARDS_ENDPOINT, methods=['PUT'])
     def updateCard():
         pass
@@ -37,7 +37,8 @@ def initUserRoutes(app):
         ease = int(request.args.get('ease'))
         UserServices.registerRevision(getUserFromHeader(request), id, ease, timer_started)
         return ""
-    @app.route('/notes', methods=['DELETE'])
-    def deleteNote():
-        pass
 
+    @app.route(CARDS_ENDPOINT, methods=['DELETE'])
+    def deleteNotes():
+        UserServices.deleteNotes(getUserFromHeader(request), request.json)
+        return ""

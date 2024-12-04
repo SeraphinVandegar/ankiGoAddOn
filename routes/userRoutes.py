@@ -1,3 +1,5 @@
+import time
+
 from flask import request
 
 from domain.CardDto import CardDto
@@ -23,7 +25,7 @@ def initUserRoutes(app):
     @app.route(CARDS_ENDPOINT, methods=['PUT'])
     def updateCard():
         data = request.json
-        dtos = [CardDto(dto['id'], dto['native'], dto['foreign'], dto['tags']) for dto in data]
+        dtos = [CardDto(int(dto['id']), dto['native'], dto['foreign'], dto['tags']) for dto in data]
         UserServices.updateNotes(getUserFromHeader(request), dtos)
         return ""
 
@@ -33,7 +35,7 @@ def initUserRoutes(app):
 
     @app.route(CARDS_TO_REVISE_ENDPOINT, methods=['PATCH'])
     def registerRevision():
-        timer_started = float(request.args.get('timer_started'))
+        timer_started = time.time() - float(request.args.get('time_to_answer'))
         id = int(request.args.get('id'))
         ease = int(request.args.get('ease'))
         UserServices.registerRevision(getUserFromHeader(request), id, ease, timer_started)

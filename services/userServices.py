@@ -33,6 +33,7 @@ class UserServices:
     @classmethod
     def registerRevision(cls, user: User, id: int, ease: int, timer_started: float):
         card = user.getCard(id)
+        card.start_timer()
         card.timer_started = timer_started
         user.answerCard(card, ease)
         user.sync()

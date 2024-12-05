@@ -8,8 +8,8 @@ Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 Content-Type: application/json
 
 [{
-  "native" : "Bonjour",
-  "foreign" : "Hallo333",
+  "native" : "joyeau",
+  "foreign" : "jewel23",
   "tags" : []
 },{
   "native" : "Bonjour",
@@ -30,7 +30,7 @@ DELETE localhost:5000/cards
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 Content-Type: application/json
 
-[1733000565236]
+[1733224099623]
 
 
 ### update > 200

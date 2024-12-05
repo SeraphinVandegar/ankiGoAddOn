@@ -1,6 +1,21 @@
 ### cards > 200
 GET localhost:5000/cards
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+### cards > 200
+GET localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+### cards > 200
+GET localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+### cards > 200
+GET localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+### cards > 200
+GET localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+### cards > 200
+GET localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 
 ### cards > 200
 POST localhost:5000/cards
@@ -22,8 +37,8 @@ GET localhost:5000/cards-to-revise
 Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 
 ### cards to revise > 200
-PATCH localhost:5000/cards-to-revise?id=1733151780893&ease=2&timer_started=1733174593.5337138
-Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+#PATCH localhost:5000/cards-to-revise?id=1733151780893&ease=2&time_to_answer=10
+#Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
 
 ### delete cards > 200
 DELETE localhost:5000/cards
@@ -47,5 +62,67 @@ Content-Type: application/json
   "id" : 1733224099625,
   "native" : "updated",
   "foreign" : "H4",
+  "tags" : []
+}]
+
+
+
+### cards > 200
+POST localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+Content-Type: application/json
+
+[{
+  "native" : "joyeau",
+  "foreign" : "jewel23",
+  "tags" : []
+},{
+  "native" : "Bonjour",
+  "foreign" : "Hallo444",
+  "tags" : []
+}]
+
+### cards > 200
+POST localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+Content-Type: application/json
+
+[{
+  "native" : "joyeau",
+  "foreign" : "jewel23",
+  "tags" : []
+},{
+  "native" : "Bonjour",
+  "foreign" : "Hallo444",
+  "tags" : []
+}]
+
+### cards > 200
+POST localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+Content-Type: application/json
+
+[{
+  "native" : "joyeau",
+  "foreign" : "jewel23",
+  "tags" : []
+},{
+  "native" : "Bonjour",
+  "foreign" : "Hallo444",
+  "tags" : []
+}]
+
+### cards > 200
+POST localhost:5000/cards
+Authorization: {"username":"s.vandegar@student.helmo.be", "password":"pppppppp"}
+Content-Type: application/json
+
+[{
+  "native" : "joyeau",
+  "foreign" : "jewel23",
+  "tags" : []
+},{
+  "native" : "Bonjour",
+  "foreign" : "Hallo444",
   "tags" : []
 }]

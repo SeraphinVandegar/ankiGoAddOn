@@ -18,26 +18,15 @@ class UserServices:
     def createCard(cls, user: User, cardDtos: [dict]):
         for cardDto in cardDtos:
             n = user.createNote([cardDto["question"], cardDto["answer"]], note_type_name="Plaint")
-            print(cardDto["current_state"])
 
-            def bury_sibling_cards(card_id):
+            def bury_sibling_cards(card_ids):
+                for cid in card_ids:
+                    card = user.col.getCard(cid)
+                    card.queue = -1
+                    user.col.update_card(card)
 
-                col = user.col
-                card = col.getCard(card_id)
-                siblings = col.db.list("SELECT id FROM cards WHERE nid = ?", card.nid)
-
-                for sibling_id in siblings:
-                    sibling_card = col.getCard(sibling_id)
-                    sibling_card.queue = 4
-                    print(sibling_card.type)
-                    sibling_card.type = 3
-                    print("flushing")
-                    col.update_card(sibling_card)
-
-            if cardDto["current_state"] == "BURIED":
-                user.col.sched.buryNote(n.id)
-                bury_sibling_cards(n.card_ids()[0])
-
+            if cardDto["current_state"] == "SUSPENDED":
+                bury_sibling_cards(n.card_ids())
         user.sync()
 
     @classmethod
@@ -85,21 +74,21 @@ class UserServices:
     @classmethod
     def get_next_due_after_answer(cls, user, card_id):
         states = user.getSchedulingStates(card_id)
-        try:
-            return {
-                "again": re.search(nextDuePattern, states.again.__str__(), flags=re.DOTALL).group("nextdue"),
-                "hard": re.search(nextDuePattern, states.hard.__str__(), flags=re.DOTALL).group("nextdue"),
-                "good": re.search(nextDuePattern, states.good.__str__(), flags=re.DOTALL).group("nextdue"),
-                "easy": re.search(nextDuePattern, states.easy.__str__(), flags=re.DOTALL).group("nextdue"),
-            }
-        except Exception as e:
-            print(e)
-            return {
-                "again": "None",
-                "hard": "None",
-                "good": "None",
-                "easy": "None"
-            }
+
+        def parseState(string):
+            try:
+                return re.search(nextDuePattern, string, flags=re.DOTALL).group("nextdue")
+            except Exception as e:
+                print("Couldn't get next dues", e)
+                print(string)
+                return "None"
+
+        return {
+            "again": parseState(states.again.__str__()),
+            "hard": parseState(states.hard.__str__()),
+            "good": parseState(states.good.__str__()),
+            "easy": parseState(states.easy.__str__()),
+        }
 
     @classmethod
     def mapToUsableCard(cls, user, card):
@@ -115,15 +104,9 @@ class UserServices:
 
     @classmethod
     def getCurrentState(cls, user, cardId):
+        c = user.col.getCard(cardId)
+        if c.queue == -1:
+            return "suspended"
         pattern = r"[a-z_]+.*?{\s+?(?P<currentstate>[a-z]+)"
-        print(user.getCardFieds(cardId))
-        print(user.col._backend.get_scheduling_states(cardId))
         currentState = user.col._backend.get_scheduling_states(cardId).current
-        print("current state")
-        print(currentState.__str__())
-        try:
-            return re.search(pattern, currentState.__str__(), flags=re.DOTALL).group("currentstate")
-        except Exception as e:
-            print("execp", e.__str__())
-            if e.__str__() == "'NoneType' object has no attribute 'group'" or True:
-                return "BURIED"
+        return re.search(pattern, currentState.__str__(), flags=re.DOTALL).group("currentstate")

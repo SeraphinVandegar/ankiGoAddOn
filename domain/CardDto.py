@@ -1,5 +1,4 @@
-import json
-
+"""import json
 
 class CardDto:
     def __init__(self, id, native, foreign, tags=None):
@@ -12,3 +11,4 @@ class CardDto:
 
     def toJson(self):
         return json.dumps(self.__dict__)
+"""

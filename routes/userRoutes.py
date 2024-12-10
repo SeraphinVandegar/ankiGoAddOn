@@ -4,7 +4,6 @@ from multiprocessing import Lock
 
 from flask import request, abort
 
-from domain.CardDto import CardDto
 from routes.utils import getUserFromHeader
 from services.userServices import UserServices
 
@@ -30,15 +29,16 @@ def initUserRoutes(app):
     def getCards():
         try:
             with getUserLock(request):
-                return UserServices.getCards(getUserFromHeader(request))
+                cards = UserServices.getCards(getUserFromHeader(request))
+                print(cards)
+                return cards
         except:
             abort(401, description="Access Denied")
     @app.route(CARDS_ENDPOINT, methods=['POST'])
     def createCard():
         with getUserLock(request):
             data = request.json
-            dtos = [CardDto(-1, dto['native'], dto['foreign'], dto['tags']) for dto in data]
-            UserServices.createCard(getUserFromHeader(request), dtos)
+            UserServices.createCard(getUserFromHeader(request), data)
             return ""
 
     @app.route(CARDS_ENDPOINT, methods=['PUT'])
@@ -46,8 +46,8 @@ def initUserRoutes(app):
         with getUserLock(request):
             try:
                 data = request.json
-                dtos = [CardDto(int(dto['id']), dto['native'], dto['foreign'], dto['tags']) for dto in data]
-                UserServices.updateNotes(getUserFromHeader(request), dtos)
+                print(data)
+                UserServices.updateNotes(getUserFromHeader(request), data)
             except:
                 pass
             return ""

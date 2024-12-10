@@ -1,5 +1,4 @@
 import re
-from domain.CardDto import CardDto
 from domain.User import User
 
 nextDuePattern = r"(review|learning).+?(?P<nextdue>scheduled_(secs|days): \d+)"
@@ -8,7 +7,7 @@ nextDuePattern = r"(review|learning).+?(?P<nextdue>scheduled_(secs|days): \d+)"
 class UserServices:
 
     @classmethod
-    def getCards(cls, user: User) -> [CardDto]:
+    def getCards(cls, user: User) -> [dict]:
         dtos = []
         for card in user.getCards():
             card = cls.mapToUsableCard(user, card)
@@ -16,9 +15,9 @@ class UserServices:
         return dtos
 
     @classmethod
-    def createCard(cls, user: User, cardDto: [CardDto]):
-        for cardDto in cardDto:
-            user.createNote([cardDto.native, cardDto.foreign], cardDto.tags, "Plaint")
+    def createCard(cls, user: User, cardDtos: [dict]):
+        for cardDto in cardDtos:
+            user.createNote([cardDto["question"], cardDto["answer"]], note_type_name="Plaint")
         user.sync()
 
     @classmethod
@@ -54,10 +53,9 @@ class UserServices:
         user.sync()
 
     @classmethod
-    def updateNotes(cls, user: User, cards: [CardDto]):
+    def updateNotes(cls, user: User, cards: [dict]):
         for card in cards:
-            nid = user.getCard(card.id).nid
-            user.updateNote(nid, [card.native, card.foreign])
+            user.updateNote(card["nid"], [card["question"], card["answer"]])
         user.sync()
 
     @classmethod

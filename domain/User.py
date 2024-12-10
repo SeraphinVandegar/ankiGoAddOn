@@ -18,7 +18,7 @@ class User:
     def getNotes(self):
         return self.col.db.all("SELECT * FROM notes")
 
-    def createNote(self, fields, tags=None, note_type_name = "Plaint"):
+    def createNote(self, fields, tags=None, note_type_name="Plaint"):
         if tags is None:
             tags = []
 

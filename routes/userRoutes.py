@@ -30,9 +30,9 @@ def initUserRoutes(app):
         try:
             with getUserLock(request):
                 cards = UserServices.getCards(getUserFromHeader(request))
-                print(cards)
                 return cards
-        except:
+        except Exception as e:
+            print(e)
             abort(401, description="Access Denied")
     @app.route(CARDS_ENDPOINT, methods=['POST'])
     def createCard():

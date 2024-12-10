@@ -2,7 +2,7 @@ import json
 import time
 from multiprocessing import Lock
 
-from flask import request
+from flask import request, abort
 
 from domain.CardDto import CardDto
 from routes.utils import getUserFromHeader
@@ -28,9 +28,11 @@ def getUserLock(_request):
 def initUserRoutes(app):
     @app.route(CARDS_ENDPOINT, methods=['GET'])
     def getCards():
-        with getUserLock(request):
-            return UserServices.getCards(getUserFromHeader(request))
-
+        try:
+            with getUserLock(request):
+                return UserServices.getCards(getUserFromHeader(request))
+        except:
+            abort(401, description="Access Denied")
     @app.route(CARDS_ENDPOINT, methods=['POST'])
     def createCard():
         with getUserLock(request):

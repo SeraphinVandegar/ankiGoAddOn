@@ -55,7 +55,11 @@ class UserServices:
     @classmethod
     def updateNotes(cls, user: User, cards: [dict]):
         for card in cards:
-            user.updateNote(card["nid"], [card["question"], card["answer"]])
+            try:
+                user.updateNote(int(card["nid"]), [card["question"], card["answer"]])
+            except Exception as e:
+                print(e)
+                pass
         user.sync()
 
     @classmethod

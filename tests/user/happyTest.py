@@ -37,7 +37,7 @@ testingNote2 = user.createNote(["front", "back"])
 user.updateNote(testingNote2.id, ["front4", "back3"])
 checkCardFields(user, testingNote2.id, ["front4", "back3"])
 
-user.deleteNote([str(testingNote.id), str(testingNote2.id)])
+user.deleteNote([testingNote.id, testingNote2.id])
 checkNoteDeleted(user, testingNote)
 checkNoteDeleted(user, testingNote2)
 

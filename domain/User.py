@@ -84,7 +84,7 @@ class User:
         cards = [self.col.get_card(id) for id in self.col.find_cards("")]
         return cards
 
-    def updateNote(self, id, fields):
+    def updateNote(self, id : int, fields):
         note = self.col.get_note(id)
         note.fields = fields
         self.col.update_note(note)

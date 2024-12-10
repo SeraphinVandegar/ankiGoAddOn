@@ -27,10 +27,12 @@ class UserServices:
     def getCardsToRevise(cls, user: User):
         dtos = []
         for card in user.getCardsToRevise():
-            fields = user.getCardFieldsFromCard(card)
-            if fields is None:
-                continue
-            dtos.append(CardDto(card.id, fields[0], fields[1]).__dict__)
+            card = cls.mapToUsableCard(user, card)
+            dtos.append(card)
+            #fields = user.getCardFieldsFromCard(card)
+            #if fields is None:
+            #    continue
+            #dtos.append(CardDto(card.id, fields[0], fields[1]).__dict__)
         return dtos
 
     @classmethod

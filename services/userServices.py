@@ -69,3 +69,14 @@ class UserServices:
             "good": re.search(nextDuePattern, states.good.__str__(), flags=re.DOTALL).group("nextdue"),
             "easy": re.search(nextDuePattern, states.easy.__str__(), flags=re.DOTALL).group("nextdue"),
         }
+
+    @classmethod
+    def mapToUsableCard(cls, user, card):
+        pattern = r"__\$\$(?P<field>.*)__\$\$"
+        return {
+            "id": card.id,
+            "nid": card.nid,
+            "question": re.search(pattern, card.question(), flags=re.DOTALL).group("field"),
+            "answer": re.search(pattern, card.answer(), flags=re.DOTALL).group("field"),
+            "next_due": UserServices.get_next_due_after_answer(user, card.id)
+        }

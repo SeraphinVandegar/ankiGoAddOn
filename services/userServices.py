@@ -11,10 +11,8 @@ class UserServices:
     def getCards(cls, user: User) -> [CardDto]:
         dtos = []
         for card in user.getCards():
-            fields = user.getCardFieldsFromCard(card)
-            if fields is None:
-                continue
-            dtos.append(CardDto(card.id, fields[0], fields[1]).__dict__)
+            card = cls.mapToUsableCard(user, card)
+            dtos.append(card)
         return dtos
 
     @classmethod

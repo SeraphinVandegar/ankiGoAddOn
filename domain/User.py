@@ -83,3 +83,6 @@ class User:
         note = self.col.get_note(id)
         note.fields = fields
         self.col.update_note(note)
+
+    def getSchedulingStates(self, card_id):
+        return self.col._backend.get_scheduling_states(card_id)

@@ -13,8 +13,6 @@ c2 = user.getNotes()[0]
 
 print(user.getCard(user.getCardIds()[0]).__dict__)
 
-
-
 sched = user.col.sched
 
 card = sched.getCard()
@@ -28,10 +26,17 @@ print(again_interval)
 again_interval = sched.nextIvl(card, ease=4)
 print(again_interval)
 
-
 states = user.col._backend.get_scheduling_states(card.id)
 print(states.again)
-print(states.hard)
+print()
+print(states.again.__dict__)
+print()
+print(states.again.New.__dict__)
+# print(type(states.again))
+"""print(states.hard)
 print(states.good)
 print(states.easy)
 print(states.current)
+"""
+
+from aqt import mw

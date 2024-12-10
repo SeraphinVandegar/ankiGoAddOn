@@ -80,5 +80,13 @@ class UserServices:
             "nid": card.nid,
             "question": re.search(pattern, card.question(), flags=re.DOTALL).group("field"),
             "answer": re.search(pattern, card.answer(), flags=re.DOTALL).group("field"),
-            "next_due": UserServices.get_next_due_after_answer(user, card.id)
+            "next_due": UserServices.get_next_due_after_answer(user, card.id),
+            "current_state": UserServices.getCurrentState(user, card.id)
         }
+
+    @classmethod
+    def getCurrentState(cls, user, cardId):
+        pattern = r"[a-z_]+.*?{\s+?(?P<currentstate>[a-z]+)"
+        currentState = user.col._backend.get_scheduling_states(cardId).current
+        return re.search(pattern, currentState.__str__(), flags=re.DOTALL).group("currentstate")
+

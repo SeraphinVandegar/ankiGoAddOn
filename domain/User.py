@@ -18,9 +18,13 @@ class User:
     def getNotes(self):
         return self.col.db.all("SELECT * FROM notes")
 
-    def createNote(self, fields, tags=None):
+    def createNote(self, fields, tags=None, note_type_name = "Plaint"):
         if tags is None:
             tags = []
+
+        model = self.col.models.byName(note_type_name)
+        if not model:
+            raise ValueError(f"Note type '{note_type_name}' does not exist.")
         note = self.col.newNote()
         note.fields = fields
         note.tags = tags
@@ -29,13 +33,14 @@ class User:
 
     def sync(self):
         auth = self.col.sync_login(self.username, self.password, None)
-        self.col.sync_collection(auth, False)
+        self.col.sync_collection(auth, True)
 
     def deleteNote(self, ids: [int]):
         self.col.remove_notes(ids)
 
-    def _deleteAllNotes(self):
+    def _deleteAllNotesAndCards(self):
         self.col.db.all("DELETE FROM notes")
+        self.col.db.all("DELETE FROM cards")
 
     def getCardsToRevise(self):
         due_counts = self.col.sched.get_queued_cards(fetch_limit=1000)
@@ -75,7 +80,7 @@ class User:
     def getCardFieldsFromCard(self, card: Card):
         return self.getNoteFields(card._to_backend_card().note_id)
 
-    def getCards(self):
+    def getCards(self) -> [Card]:
         cards = [self.col.get_card(id) for id in self.col.find_cards("")]
         return cards
 

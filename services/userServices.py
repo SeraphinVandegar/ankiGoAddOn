@@ -20,7 +20,7 @@ class UserServices:
     @classmethod
     def createCard(cls, user: User, cardDto: [CardDto]):
         for cardDto in cardDto:
-            user.createNote([cardDto.native, cardDto.foreign], cardDto.tags)
+            user.createNote([cardDto.native, cardDto.foreign], cardDto.tags, "Plaint")
         user.sync()
 
     @classmethod
